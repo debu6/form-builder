@@ -18,7 +18,8 @@ function App() {
         {isAuthenticated && (
           <>
             <Route path="/form-builder" element={<FormBuilder />} />
-            <Route path="/responses" element={<ResponsePage />} />
+            <Route path="/responses/:id" element={<ResponsePage />} />
+            
           </>
         )}
       </Routes>

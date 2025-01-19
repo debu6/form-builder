@@ -1,8 +1,8 @@
 {
   "forms": [
     {
-      "id": "cf89",
-      "title": "test",
+      "id": "0441",
+      "title": "Demo",
       "fields": [
         {
           "type": "text",
@@ -11,26 +11,70 @@
           "rules": {
             "0": {
               "label": "Label",
-              "value": "name"
+              "value": "Name",
+              "placeholder": "Enter label"
             },
             "1": {
               "label": "Regex",
-              "value": ""
+              "value": "^[A-Za-z]+$",
+              "placeholder": "Ex:^[a-zA-Z]+$"
             },
             "2": {
               "label": "Placeholder",
-              "value": "enter your name"
+              "value": "Enter your name",
+              "placeholder": "Enter Placeholder"
             },
             "3": {
               "label": "limit",
-              "value": "20"
+              "value": "20",
+              "placeholder": "Enter number"
             },
             "type": "text"
           }
         },
         {
-          "label": "age ",
-          "options": "10,20,30",
+          "label": "city",
+          "options": "Kolkata,Delhi",
+          "selectedOption": "",
+          "type": "radio"
+        },
+        {
+          "label": "Experience",
+          "options": "1 year,2 Year",
+          "selectedOption": "",
+          "type": "radio"
+        },
+        {
+          "type": "text",
+          "label": "",
+          "name": "",
+          "rules": {
+            "0": {
+              "label": "Label",
+              "value": "Mobile",
+              "placeholder": "Enter label"
+            },
+            "1": {
+              "label": "Regex",
+              "value": "^[6-9]\\d{9}$",
+              "placeholder": "Ex:^[a-zA-Z]+$"
+            },
+            "2": {
+              "label": "Placeholder",
+              "value": "Enter your mobile",
+              "placeholder": "Enter Placeholder"
+            },
+            "3": {
+              "label": "limit",
+              "value": "10",
+              "placeholder": "Enter number"
+            },
+            "type": "text"
+          }
+        },
+        {
+          "label": "Education",
+          "options": "B.tech,MCA,B.Sc",
           "selectedOption": "",
           "type": "radio"
         }
@@ -39,55 +83,26 @@
   ],
   "responses": [
     {
-      "id": "41db",
-      "": "debanjan",
-      "name": "age ",
-      "value": "20",
-      "formId": "cf89"
+      "id": "8eed",
+      "response": {
+        "Name": "debanjan",
+        "Mobile": "8918988706",
+        "city": "Kolkata",
+        "Experience": "2 Year",
+        "Education": "MCA"
+      },
+      "formId": "0441"
     },
     {
-      "id": "edab",
-      "": "jbbj",
-      "radio": {
-        "name": "age ",
-        "value": "10"
+      "id": "4b0f",
+      "response": {
+        "Name": "Anupam",
+        "city": "Delhi",
+        "Experience": "1 year",
+        "Mobile": "8926598199",
+        "Education": "B.Sc"
       },
-      "formId": "cf89"
-    },
-    {
-      "id": "8632",
-      "": "jbbj",
-      "radio": {
-        "name": "age ",
-        "value": "10"
-      },
-      "formId": "cf89"
-    },
-    {
-      "id": "0e65",
-      "": "jbbj",
-      "radio": {
-        "name": "age ",
-        "value": "10"
-      },
-      "text": {
-        "name": "",
-        "value": "jbbjhvhv"
-      },
-      "formId": "cf89"
-    },
-    {
-      "id": "265b",
-      "": "jbbj",
-      "radio": {
-        "name": "age ",
-        "value": "10"
-      },
-      "text": {
-        "name": "name",
-        "value": "jbbjhvhvhvbh"
-      },
-      "formId": "cf89"
+      "formId": "0441"
     }
   ]
 }

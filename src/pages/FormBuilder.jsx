@@ -9,11 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { IoMdClose } from "react-icons/io";
 import { IoMdMenu } from "react-icons/io";
+import RenderCondition from '../components/RenderCondition';
 
 function FormBuilder() {
   const navigate = useNavigate();
   const [textfiledrules, setTextfiledrules] = useState([{ label: 'Label', value: '', placeholder: 'Enter label' }, { label: 'Regex', value: '', placeholder: 'Ex:^[a-zA-Z]+$' }, { label: 'Placeholder', value: '', placeholder: 'Enter Placeholder' }, { label: 'limit', value: '', placeholder: 'Enter number' }])
-  const [radioField, setRadioField] = useState({ label: '', options: '', selectedOption: '' })
+  const [radioField, setRadioField] = useState({ label: '', options: '', selectedOption: '', renderCondition: {} })
   const [isOpen, setIsOpen] = useState(true)
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
@@ -53,16 +54,41 @@ function FormBuilder() {
     setTextfiledrules(arr)
   }
 
-  const ResetTextrules=()=>{
+  const ResetTextrules = () => {
     setTextfiledrules([{ label: 'Label', value: '', placeholder: 'Enter label' }, { label: 'Regex', value: '', placeholder: 'Ex:^[a-zA-Z]+$' }, { label: 'Placeholder', value: '', placeholder: 'Enter Placeholder' }, { label: 'limit', value: '', placeholder: 'Enter number' }])
   }
 
-  const resetRadiorules=()=>{
+  const resetRadiorules = () => {
     setRadioField({ label: '', options: '', selectedOption: '' })
+
+  }
+
+  const renderConditionHandler = (val, name) => {
+
+    setRadioField({ ...radioField, renderCondition: { ...radioField.renderCondition, [name]: val } })
+  }
+
+  const renderTxtConditionHandler = (val, name) => {
+    
+
+    let updateTextfiledrules=[...textfiledrules]
+
+    if(updateTextfiledrules[4]?.renderCondition){
+   
+      updateTextfiledrules[4]={renderCondition:{...updateTextfiledrules[4].renderCondition,[name]:val}} 
+    }else{
+    
+      updateTextfiledrules.push({renderCondition:{[name]:val}})
+    }
+    setTextfiledrules(updateTextfiledrules)
+
   }
 
   return (
     <div className="bg-green-300  min-h-screen w-screen pt-2" style={{ paddingLeft: isOpen ? '264px' : '20px' }} >
+      {
+        console.log("oye", radioField)
+      }
       <>
         <button className='p-0 menu' onClick={toggleDrawer} style={{ display: isOpen ? 'none' : 'block' }}><IoMdMenu /></button>
         <Drawer
@@ -75,23 +101,27 @@ function FormBuilder() {
         >
           <div className=' w-full flex justify-end'><IoMdClose onClick={toggleDrawer} /></div>
           <div className='w-full  flex justify-center py-3 font-semibold'>Add Input Fields</div>
-
-          <Accordion defaultActiveKey="0">
+           <div className='containerAccordion'>
+           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Text</Accordion.Header>
               <Accordion.Body>
 
                 {
                   textfiledrules?.map((item, index) => {
-                    return (
-                      <>
-                        <strong>{item.label}</strong>
-                        <input className='form-control mb-2' value={item.value} onChange={(e) => { textRuleHandler(e.target.value, index) }} placeholder={item.placeholder} />
-                      </>
-                    )
+
+                    if(index<4){
+                      return (
+                        <>
+                          <strong>{item.label}</strong>
+                          <input className='form-control mb-2' value={item.value} onChange={(e) => { textRuleHandler(e.target.value, index) }} placeholder={item.placeholder} />
+                        </>
+                      )
+                    }
+                  
                   })
                 }
-
+                <RenderCondition renderConditionHandler={renderTxtConditionHandler} />
                 <button className='btn btn-success' onClick={handleAddField} disabled={textfiledrules[0].value == ''}>Add Field</button>
               </Accordion.Body>
             </Accordion.Item>
@@ -102,10 +132,13 @@ function FormBuilder() {
                 <input className='form-control mb-2' placeholder='Enter label name' value={radioField.label} onChange={(e) => { setRadioField({ ...radioField, label: e.target.value }) }} />
                 <strong>Options</strong>
                 <input className='form-control mb-2' placeholder='Ex:option1,option2' value={radioField.options} onChange={(e) => { setRadioField({ ...radioField, options: e.target.value }) }} />
+                <RenderCondition renderConditionHandler={renderConditionHandler} />
                 <button className='btn btn-success mt-2' disabled={radioField.label == "" || radioField.options == ""} onClick={handleAddRadioField}>Add Field</button>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
+           </div>
+        
         </Drawer>
       </>
       <h1 className="text-2xl pl-2 marginLeft">Create Form</h1>

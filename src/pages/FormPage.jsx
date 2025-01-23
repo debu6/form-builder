@@ -31,7 +31,7 @@ function FormPage() {
 
   const handleChange = (e, field, index) => {
 
-    console.log("conchange ", typeof (new RegExp(field.rules[1].value)))
+
 
     if (field.rules.type === 'text') {
       let newError = { ...Error };
@@ -39,12 +39,12 @@ function FormPage() {
 
 
       if (parseInt(field.rules[3].value) < e.target.value.length) {
-        console.log("Length error:", { ...newError, limit: `limit should be ${field.rules[3].value}` });
+
         newError.limit = `limit should be ${field.rules[3].value}`;
         errorFlag = true;
       } else {
         newError.limit = ``;
-        addError(index,undefined)
+        addError(index, undefined)
       }
 
 
@@ -52,20 +52,20 @@ function FormPage() {
       try {
         const regex = new RegExp(regexPattern);
         if (!regex.test(e.target.value)) {
-          console.log("Regex error:", { ...newError, regex: `Invalid input` });
+
           newError.regex = `Invalid input`;
           errorFlag = true;
         } else {
           newError.regex = ``;
-          addError(index,undefined)
+          addError(index, undefined)
         }
       } catch (error) {
-        console.error("Invalid regex pattern:", regexPattern);
+
         newError.regex = `Invalid regex pattern`;
         errorFlag = true;
       }
 
-      console.log("rafter", index,)
+
 
       addError(index, { ...newError })
 
@@ -94,7 +94,7 @@ function FormPage() {
   }
 
   const handleSubmit = async (e) => {
-    console.log("response---", response)
+
     e.preventDefault();
     try {
       await createResponse({ response, formId: form.id });
@@ -122,6 +122,25 @@ function FormPage() {
     return false;
   };
 
+  const checkRender = (fields, renderCondition) => {
+     console.log("dfdfdf",fields)
+    let flag = true
+
+    fields.forEach((field,index) => {
+     
+      if (field?.type == renderCondition?.FieldType && (field.label?field.label:field?.rules[0]?.value) == renderCondition?.label) {
+         
+        if (response[(field.label?field.label:field?.rules[0]?.value)] == renderCondition.value) {
+
+          flag = true
+        } else {
+          flag = false
+        }
+      }
+    })
+    return flag
+  }
+
   if (isLoading) return <div>Loading form...</div>;
   if (error) return <div>Error loading form!</div>;
 
@@ -132,12 +151,16 @@ function FormPage() {
 
       <Row >
         <form style={{ display: 'contents' }} onSubmit={handleSubmit}>
+          {
+            console.log("fields", form.fields)
+          }
           {form.fields.map((field, index) => (
             <Col md={4} sm={12} className='p-3'>
               <>
-
+              
                 {
-                  field?.rules?.type == "text" && (
+                 
+                ( checkRender(form.fields,field.renderCondition?field?.renderCondition:field?.rules[4]?.renderCondition) && field?.rules?.type == "text") && (
                     <div key={index} className="mb-4">
 
                       <label htmlFor={field.name} className="block text-lg font-medium">{field.rules.type == 'text' ? field.rules[0].value : ''}</label>
@@ -150,43 +173,49 @@ function FormPage() {
                       />
 
                       {
-                        
-                         errors?.map((err,i)=>{
 
-                          if(i==index){
+                        errors?.map((err, i) => {
+
+                          if (i == index) {
                             return <div className='error'>
-                          <span>{err?.limit}</span>
-                          <span>{err?.regex}</span>
-                          </div>
+                              <span>{err?.limit}</span>
+                              <span>{err?.regex}</span>
+                            </div>
                           }
-                          
-                         })
+
+                        })
                       }
                     </div>
                   )
                 }
 
                 {
-                  field.type == 'radio' && (<strong>{field.label}</strong>)
+                 ( checkRender(form.fields, field.renderCondition) && field.type == 'radio' )&& (
+                    
+                          <>
+                            <strong>{field.label}</strong>
+
+                            {
+                              field.type == 'radio' && field?.options?.split(",").map((item) => {
+                                return (
+                                  <Form.Check
+                                    type="radio"
+                                    label={item}
+                                    name={field.label}
+                                    value={item}
+                                    id="radio1"
+                                    onChange={(e) => { handleChangeRadio(e.target.value, field.label) }}
+
+                                  />
+                                )
+                              })
+                            }
+                          </>
+                    
+                  )
                 }
 
-                {
 
-
-                  field.type == 'radio' && field?.options?.split(",").map((item) => {
-                    return (
-                      <Form.Check
-                        type="radio"
-                        label={item}
-                        name={field.label}
-                        value={item}
-                        id="radio1"
-                        onChange={(e) => { handleChangeRadio(e.target.value, field.label) }}
-
-                      />
-                    )
-                  })
-                }
 
 
 

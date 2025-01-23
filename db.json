@@ -1,8 +1,77 @@
 {
   "forms": [
     {
-      "id": "0441",
-      "title": "Demo",
+      "id": "0538",
+      "title": "Text condition on Text ( value-Debanjan)",
+      "fields": [
+        {
+          "type": "text",
+          "label": "",
+          "name": "",
+          "rules": {
+            "0": {
+              "label": "Label",
+              "value": "First Name",
+              "placeholder": "Enter label"
+            },
+            "1": {
+              "label": "Regex",
+              "value": "",
+              "placeholder": "Ex:^[a-zA-Z]+$"
+            },
+            "2": {
+              "label": "Placeholder",
+              "value": "",
+              "placeholder": "Enter Placeholder"
+            },
+            "3": {
+              "label": "limit",
+              "value": "",
+              "placeholder": "Enter number"
+            },
+            "type": "text"
+          }
+        },
+        {
+          "type": "text",
+          "label": "",
+          "name": "",
+          "rules": {
+            "0": {
+              "label": "Label",
+              "value": "Last Name",
+              "placeholder": "Enter label"
+            },
+            "1": {
+              "label": "Regex",
+              "value": "",
+              "placeholder": "Ex:^[a-zA-Z]+$"
+            },
+            "2": {
+              "label": "Placeholder",
+              "value": "",
+              "placeholder": "Enter Placeholder"
+            },
+            "3": {
+              "label": "limit",
+              "value": "",
+              "placeholder": "Enter number"
+            },
+            "4": {
+              "renderCondition": {
+                "FieldType": "text",
+                "label": "First Name",
+                "value": "Debanjan"
+              }
+            },
+            "type": "text"
+          }
+        }
+      ]
+    },
+    {
+      "id": "4e57",
+      "title": "Text condition on radio (value-Debanjan)",
       "fields": [
         {
           "type": "text",
@@ -16,32 +85,68 @@
             },
             "1": {
               "label": "Regex",
-              "value": "^[A-Za-z]+$",
+              "value": "",
               "placeholder": "Ex:^[a-zA-Z]+$"
             },
             "2": {
               "label": "Placeholder",
-              "value": "Enter your name",
+              "value": "",
               "placeholder": "Enter Placeholder"
             },
             "3": {
               "label": "limit",
-              "value": "20",
+              "value": "",
               "placeholder": "Enter number"
             },
             "type": "text"
           }
         },
         {
-          "label": "city",
+          "label": "City",
           "options": "Kolkata,Delhi",
           "selectedOption": "",
+          "renderCondition": {
+            "FieldType": "text",
+            "label": "Name",
+            "value": "Debanjan"
+          },
+          "type": "radio"
+        }
+      ]
+    },
+    {
+      "id": "8172",
+      "title": "Radio condition on radio (value-Kolkata)",
+      "fields": [
+        {
+          "label": "City",
+          "options": "Kolkata,Delhi",
+          "selectedOption": "",
+          "renderCondition": {},
           "type": "radio"
         },
         {
-          "label": "Experience",
-          "options": "1 year,2 Year",
+          "label": "Zone",
+          "options": "North,South",
           "selectedOption": "",
+          "renderCondition": {
+            "FieldType": "radio",
+            "label": "City",
+            "value": "Kolkata"
+          },
+          "type": "radio"
+        }
+      ]
+    },
+    {
+      "id": "6bb3",
+      "title": "Radio condition on text (value-Kolkata)",
+      "fields": [
+        {
+          "label": "City",
+          "options": "Kolkata,Delhi",
+          "selectedOption": "",
+          "renderCondition": {},
           "type": "radio"
         },
         {
@@ -51,58 +156,36 @@
           "rules": {
             "0": {
               "label": "Label",
-              "value": "Mobile",
+              "value": "Address",
               "placeholder": "Enter label"
             },
             "1": {
               "label": "Regex",
-              "value": "^[6-9]\\d{9}$",
+              "value": "",
               "placeholder": "Ex:^[a-zA-Z]+$"
             },
             "2": {
               "label": "Placeholder",
-              "value": "Enter your mobile",
+              "value": "",
               "placeholder": "Enter Placeholder"
             },
             "3": {
               "label": "limit",
-              "value": "10",
+              "value": "",
               "placeholder": "Enter number"
+            },
+            "4": {
+              "renderCondition": {
+                "FieldType": "radio",
+                "label": "City",
+                "value": "Kolkata"
+              }
             },
             "type": "text"
           }
-        },
-        {
-          "label": "Education",
-          "options": "B.tech,MCA,B.Sc",
-          "selectedOption": "",
-          "type": "radio"
         }
       ]
     }
   ],
-  "responses": [
-    {
-      "id": "8eed",
-      "response": {
-        "Name": "debanjan",
-        "Mobile": "8918988706",
-        "city": "Kolkata",
-        "Experience": "2 Year",
-        "Education": "MCA"
-      },
-      "formId": "0441"
-    },
-    {
-      "id": "4b0f",
-      "response": {
-        "Name": "Anupam",
-        "city": "Delhi",
-        "Experience": "1 year",
-        "Mobile": "8926598199",
-        "Education": "B.Sc"
-      },
-      "formId": "0441"
-    }
-  ]
+  "responses": []
 }

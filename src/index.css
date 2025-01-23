@@ -108,3 +108,13 @@ button:focus-visible {
   color: red;
 }
 
+.flexDirctionColumn{
+  flex-direction: column !important;
+}
+
+.containerAccordion{
+  height: 85vh;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
